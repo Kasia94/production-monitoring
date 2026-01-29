@@ -24,11 +24,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "primeicons/primeicons.css",
-              "src/styles.css"
-              
-            ]
+            "styles": ["primeicons/primeicons.css", "src/styles/styles.css"]
           },
           "configurations": {
             "production": {
