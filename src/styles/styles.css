@@ -1,18 +1,18 @@
 @import 'tailwindcss';
 
-:root {
-  --color-primary: #2563eb; /* niebieski */
-  --color-secondary: #60a5fa; /* jasny niebieski */
-  --color-danger: #ef4444; /* czerwony */
-  --color-bg: #f9fafb; /* tło strony */
+@theme {
+  --color-primary: var(--color-blue-600); /* niebieski */
+  --color-secondary: var(--color-blue-400); /* jasny niebieski */
+  --color-danger: var(--color-red-600); /* czerwony */
+  --color-rose: var(--color-rose-400); /*jasny czerwony*/
 }
 
 @utility btn-* {
   @apply inline-flex cursor-pointer place-items-center justify-center rounded-lg border px-6 py-2 text-center font-semibold transition-colors duration-150;
 
-  background-color: var(--value(--color-primary));
-  border: 1px solid var(--value(--color-primary));
-  color: var(--modifier(--color-primary));
+  background-color: --value(--color-*);
+  border: 1px solid --value(--color-*);
+  color: --modifier(--color-*);
 
   &:disabled {
     @apply cursor-not-allowed opacity-50;
@@ -23,23 +23,9 @@
   }
 }
 
-@utility btn-secondary {
-  @apply inline-flex cursor-pointer place-items-center justify-center rounded-lg border px-6 py-2 text-center font-semibold transition-colors duration-150;
-  background-color: var(--value(--color-secondary));
-  border: 1px solid var(--value(--color-secondary));
-  color: white;
-
-  &:disabled {
-    @apply cursor-not-allowed opacity-50;
-  }
-
-  &:not(:disabled):hover {
-    filter: brightness(0.9);
-  }
-}
-
-@utility card {
+@utility card-* {
   @apply bg-white rounded-lg p-4 shadow-md;
+  background-color: --value(--color-*);
 
   @screen sm {
     @apply p-5;
@@ -60,9 +46,9 @@
   }
 }
 
-@utility alert {
+@utility alert-* {
   @apply text-white rounded-md p-3 font-semibold;
-  background-color: var(--value(--color-danger));
+  background-color: --value(--color-*);
 
   @screen sm {
     @apply p-4;
@@ -78,20 +64,9 @@
 }
 
 @utility measure-label {
-  @apply text-gray-500 text-sm uppercase tracking-wide;
+  @apply text-gray-800 text-sm uppercase tracking-wide;
 
   @screen sm {
     @apply text-base;
-  }
-}
-
-@utility cards-grid {
-  @apply grid grid-cols-1 gap-4;
-
-  @screen sm {
-    @apply grid-cols-2 gap-5;
-  }
-  @screen lg {
-    @apply grid-cols-3 gap-6;
   }
 }

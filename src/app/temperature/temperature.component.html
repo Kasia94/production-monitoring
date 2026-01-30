@@ -1,2 +1,7 @@
-<div class="measure-label">Temperatura</div>
-<div class="measure-value">23 °C</div>
+<div class="measure-label">Aktualna Temperatura</div>
+
+<div class="measure-value">{{ measure?.value }} °C</div>
+
+<div class="text-xs text-gray-600 mt-1">
+  {{ measure?.date | date: 'HH:mm:ss' }}
+</div>

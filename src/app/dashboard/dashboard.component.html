@@ -1,20 +1,14 @@
 <section class="mb-8">
-  <h1 class="text-2xl sm:text-3xl font-bold mb-4">Pomiary</h1>
+  <h1 class="text-2xl sm:text-3xl font-bold mb-4">Wyniki pomiarów</h1>
 
-  <div class="cards-grid">
-    <app-temperature class="card"></app-temperature>
-    <app-pressure class="card"></app-pressure>
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+    <app-temperature class="card-rose" [measure]="temperature()"> </app-temperature>
+
+    <app-pressure class="card-secondary" [measure]="pressure()"> </app-pressure>
   </div>
 </section>
 
-<section class="chart-container mb-8">
-  <h2 class="text-xl font-semibold mb-2">Wykres pomiarów</h2>
-  <div id="chart" class="w-full h-64"></div>
+<section class="chart-container">
+  <h2 class="text-xl font-semibold mb-2">Historia pomiarów</h2>
+  <app-chart [temperatureData]="temperatureHistory" [pressureData]="pressureHistory"> </app-chart>
 </section>
-
-<section class="flex flex-wrap gap-4">
-  <button class="btn-primary">Odśwież dane</button>
-  <button class="btn-secondary">Resetuj</button>
-</section>
-
-<div class="alert mt-6 hidden" id="errorAlert">Błąd połączenia z maszyną!</div>

@@ -1,2 +1,7 @@
-<div class="measure-label">Ciśnienie</div>
-<div class="measure-value">123 kPa</div>
+<div class="measure-label">Aktualne Ciśnienie</div>
+
+<div class="measure-value">{{ measure?.value }} kPA</div>
+
+<div class="text-xs text-gray-600 mt-1">
+  {{ measure?.date | date: 'HH:mm:ss' }}
+</div>

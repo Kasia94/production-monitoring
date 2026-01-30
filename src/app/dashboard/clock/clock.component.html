@@ -1,0 +1,13 @@
+<div class="clock-container text-right">
+  <div class="text-xs text-gray-400 uppercase tracking-wide">
+    Aktualny czas
+  </div>
+
+  <div class="text-lg sm:text-xl font-mono font-semibold">
+    {{ currentTime() | date:'HH:mm:ss' }}
+  </div>
+
+  <div class="text-xs text-gray-400">
+    {{ currentTime() | date:'dd.MM.yyyy' }}
+  </div>
+</div>
