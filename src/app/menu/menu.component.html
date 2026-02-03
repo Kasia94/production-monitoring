@@ -1,1 +1,26 @@
-<p>menu works!</p>
+<nav class="sticky top-0 bg-gray-500 text-white p-4 flex flex-col sm:flex-row gap-2">
+  <a
+    routerLink="/dashboard"
+    routerLinkActive="font-bold underline"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="px-3 py-2 rounded cursor-pointer hover:bg-gray-700"
+  >
+    Dashboard
+  </a>
+
+  <a
+    routerLink="/history"
+    routerLinkActive="font-bold underline"
+    class="px-3 py-2 rounded cursor-pointer hover:bg-gray-700"
+  >
+    Historia Pomiarów
+  </a>
+
+  <a
+    routerLink="/settings"
+    routerLinkActive="font-bold underline"
+    class="px-3 py-2 rounded cursor-pointer hover:bg-gray-700"
+  >
+    Ustawienia
+  </a>
+</nav>

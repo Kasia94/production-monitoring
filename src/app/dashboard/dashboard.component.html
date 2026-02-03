@@ -1,14 +1,16 @@
 <section class="mb-8">
-  <h1 class="text-2xl sm:text-3xl font-bold mb-4">Wyniki pomiarów</h1>
-
-  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
-    <app-temperature class="card-rose" [measure]="temperature()"> </app-temperature>
-
-    <app-pressure class="card-secondary" [measure]="pressure()"> </app-pressure>
+  <h1 class="text-2xl font-bold mb-4">Wyniki pomiarów</h1>
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 mx-auto place-items-center">
+    <app-temperature class="card-rose w-full" [measure]="store.temperature()" />
+    <app-pressure class="card-secondary w-full" [measure]="store.pressure()" />
   </div>
 </section>
 
-<section class="chart-container">
-  <h2 class="text-xl font-semibold mb-2">Historia pomiarów</h2>
-  <app-chart [temperatureData]="temperatureHistory" [pressureData]="pressureHistory"> </app-chart>
+<section>
+  <app-chart
+    [temperatureData]="store.temperatureHistory"
+    [pressureData]="store.pressureHistory"
+  ></app-chart>
+
+  <vue-measures-table #vueTable></vue-measures-table>
 </section>

@@ -1,23 +1,30 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  inject,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
+import { MeasuresService } from '../services/measure.service';
+
 import { TemperatureComponent } from '../temperature/temperature.component';
 import { PressureComponent } from '../pressure/pressure.component';
-import { Measures } from '../models/measures.model';
-import { MeasuresService } from '../services/measure.service';
 import { ChartComponent } from './chart/chart.component';
+import { MeasuresStore } from '../measures.store';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   imports: [TemperatureComponent, PressureComponent, ChartComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class DashboardComponent {
+export class DashboardComponent implements AfterViewInit {
   private measuresService = inject(MeasuresService);
-  temperature = signal<Measures | null>(null);
-  pressure = signal<Measures | null>(null);
+  readonly store = inject(MeasuresStore);
 
-  temperatureHistory = signal<Measures[]>([]);
-  pressureHistory = signal<Measures[]>([]);
+  @ViewChild('vueTable', { static: true }) vueTable!: ElementRef<any>;
 
   constructor() {
     this.measuresService.getMeasures().subscribe((measures) => {
@@ -26,11 +33,18 @@ export class DashboardComponent {
 
       if (!temp || !press) return;
 
-      this.temperature.set(temp);
-      this.pressure.set(press);
+      this.store.update(temp, press);
 
-      this.temperatureHistory.update((h) => [...h.slice(-19), temp]);
-      this.pressureHistory.update((h) => [...h.slice(-19), press]);
+      this.pushToVue();
     });
+  }
+  ngAfterViewInit() {
+    this.pushToVue();
+  }
+
+  private pushToVue() {
+    if (!this.vueTable?.nativeElement) return;
+
+    this.vueTable.nativeElement.measures = this.store.getAllHistory();
   }
 }
